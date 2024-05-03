@@ -60,6 +60,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 350, 10));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CustomerMgt/customerlogo2-resize.png"))); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(100, 100));
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 110, 90));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
