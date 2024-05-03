@@ -5,6 +5,7 @@
 package Dashboard;
 
 import CustomerMgt.CustomerDashboard;
+import Kitchen.Interface;
 import Login.LoginFrame;
 import java.awt.Toolkit;
 
@@ -183,6 +184,11 @@ public class Home extends javax.swing.JFrame {
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Kitchen Management System");
         jButton7.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 204, 204), null));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         panel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 190, 30));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dashboard/reports-resizew.png"))); // NOI18N
@@ -214,6 +220,13 @@ public class Home extends javax.swing.JFrame {
         CustomerDashboard newDashboard = new CustomerDashboard();
         newDashboard.show();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        Interface newKitchen = new Interface();
+        newKitchen.show();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
