@@ -5,7 +5,7 @@
 package grandseven_hotelmgt;
 
 import Login.LoginFrame;
-import database.databaseCon;
+
 
 /**
  *
@@ -21,7 +21,7 @@ public class GrandSeven_HotelMgt {
         LoginFrame login = new LoginFrame();
         login.show();
         
-        databaseCon.loadConnection();
+        
     }
     
 }

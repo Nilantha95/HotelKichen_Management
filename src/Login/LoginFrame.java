@@ -4,7 +4,14 @@
  */
 package Login;
 
+import Dashboard.Home;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         this.setResizable(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("HotelLogo.png")));
+        
     }
 
     /**
@@ -42,9 +49,10 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        loginEmail = new javax.swing.JTextField();
+        loginPass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        showPass = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -63,7 +71,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hotel Grand Seven");
-        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 590, 50));
+        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 580, 50));
 
         panel1.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 120));
 
@@ -93,14 +101,14 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4.setText("Email Address:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 140, 40));
 
-        jTextField2.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 410, 40));
+        loginEmail.setBackground(new java.awt.Color(153, 153, 153));
+        loginEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        loginEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
+        jPanel1.add(loginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 410, 40));
 
-        jPasswordField1.setBackground(new java.awt.Color(153, 153, 153));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 410, 40));
+        loginPass.setBackground(new java.awt.Color(153, 153, 153));
+        loginPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
+        jPanel1.add(loginPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 410, 40));
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
@@ -109,7 +117,22 @@ public class LoginFrame extends javax.swing.JFrame {
         jButton1.setToolTipText("");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 180, 50));
+
+        showPass.setBackground(new java.awt.Color(153, 153, 153));
+        showPass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        showPass.setText("Show Password");
+        showPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPassActionPerformed(evt);
+            }
+        });
+        jPanel1.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, -1, -1));
 
         panel1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 830, 240));
 
@@ -142,6 +165,74 @@ public class LoginFrame extends javax.swing.JFrame {
         SignUp newSignUp = new SignUp();
         newSignUp.show();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String email, Password, query, dbPass = null;
+        String URL,User,Pass;
+        URL = "jdbc:MySQL://localhost:3306/hotelmgt";
+        User = "root";
+        Pass = "";
+        int notFound = 0;
+        try {
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(URL, User, Pass);
+            Statement statement = con.createStatement();
+            
+            if("".equals(loginEmail.getText())){
+                JOptionPane.showMessageDialog(new JFrame(),"Admin email is required", "Error",JOptionPane.ERROR_MESSAGE);
+            }
+            else if("".equals(loginPass.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Admin password is required", "Error", JOptionPane.ERROR_MESSAGE);        
+            }
+            else{
+                email = loginEmail.getText();
+                Password = loginPass.getText();
+                
+                
+                query = "SELECT * FROM signup WHERE Email='"+email+"'";
+                ResultSet result = statement.executeQuery(query);
+                
+                while(result.next()){
+                    dbPass = result.getString("Password");
+                    notFound = 1;
+                }
+                
+                if(notFound == 1 && Password.equals(dbPass))
+                {
+                    Home newHome = new Home();
+                    newHome.setVisible(true);
+                    this.dispose();
+                } 
+                else {
+                    
+                    JOptionPane.showMessageDialog(new JFrame(),"Incorrect email or password. Try again please", "Error",JOptionPane.ERROR_MESSAGE);
+                    
+                }
+                loginPass.setText("");
+                
+
+            }
+                    
+    
+        } catch (Exception e) {
+            System.out.println("Sign Up Failed!" + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
+        // TODO add your handling code here:
+        if(showPass.isSelected())
+        {
+            loginPass.setEchoChar((char)0);
+        }
+        else
+        {
+            loginPass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,14 +278,15 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField loginEmail;
+    private javax.swing.JPasswordField loginPass;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     private java.awt.Panel panel3;
+    private javax.swing.JCheckBox showPass;
     // End of variables declaration//GEN-END:variables
 }
