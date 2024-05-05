@@ -51,8 +51,9 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         loginEmail = new javax.swing.JTextField();
         loginPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        forgotPass = new javax.swing.JButton();
         showPass = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -110,19 +111,19 @@ public class LoginFrame extends javax.swing.JFrame {
         loginPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
         jPanel1.add(loginPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 410, 40));
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jButton1.setText("Login");
-        jButton1.setToolTipText("");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        forgotPass.setBackground(new java.awt.Color(153, 153, 153));
+        forgotPass.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        forgotPass.setForeground(new java.awt.Color(204, 0, 0));
+        forgotPass.setText("Forgot Password");
+        forgotPass.setToolTipText("");
+        forgotPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
+        forgotPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        forgotPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                forgotPassActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 180, 50));
+        jPanel1.add(forgotPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 180, 50));
 
         showPass.setBackground(new java.awt.Color(153, 153, 153));
         showPass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -133,6 +134,20 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(153, 153, 153));
+        jButton3.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(204, 0, 0));
+        jButton3.setText("Login");
+        jButton3.setToolTipText("");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 153)));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 180, 50));
 
         panel1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 830, 240));
 
@@ -166,7 +181,7 @@ public class LoginFrame extends javax.swing.JFrame {
         newSignUp.show();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void forgotPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPassActionPerformed
         // TODO add your handling code here:
         
         String email, Password, query, dbPass = null;
@@ -220,7 +235,7 @@ public class LoginFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Sign Up Failed!" + e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_forgotPassActionPerformed
 
     private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
         // TODO add your handling code here:
@@ -233,6 +248,10 @@ public class LoginFrame extends javax.swing.JFrame {
             loginPass.setEchoChar('*');
         }
     }//GEN-LAST:event_showPassActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,8 +289,9 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton forgotPass;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
